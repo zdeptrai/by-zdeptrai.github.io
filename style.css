@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 body {
     margin: 0; /* Loại bỏ khoảng trắng mặc định xung quanh trang */
     overflow: hidden; /* Ngăn không cho trang bị cuộn, vì nền sẽ chiếm toàn bộ */
@@ -44,51 +44,5 @@ button {
 
 button:hover {
     background-color: rgba(0, 123, 255, 0.9); /* Nút sáng hơn khi di chuột qua */
-=======
-body {
-    margin: 0; /* Loại bỏ khoảng trắng mặc định xung quanh trang */
-    overflow: hidden; /* Ngăn không cho trang bị cuộn, vì nền sẽ chiếm toàn bộ */
-    font-family: sans-serif; /* Chọn một font chữ dễ đọc */
-    color: white; /* Màu chữ mặc định cho nội dung */
-    text-shadow: 1px 1px 2px black; /* Tạo hiệu ứng đổ bóng cho chữ để dễ nhìn trên nền động */
-}
 
-#fluid-canvas {
-    position: fixed; /* Giữ khung vẽ (canvas) cố định trên màn hình, không bị cuộn */
-    top: 0; /* Đặt canvas ở vị trí trên cùng của màn hình */
-    left: 0; /* Đặt canvas ở vị trí bên trái của màn hình */
-    width: 100vw; /* Chiều rộng của canvas bằng 100% chiều rộng của cửa sổ trình duyệt */
-    height: 100vh; /* Chiều cao của canvas bằng 100% chiều cao của cửa sổ trình duyệt */
-    z-index: -1; /* Đặt canvas ở lớp phía sau cùng, để nội dung khác nằm trên nó */
-    display: block; /* Đảm bảo canvas hiển thị dưới dạng khối, loại bỏ các khoảng trống không mong muốn */
-}
-
-.content {
-    position: relative; /* Cho phép nội dung di chuyển và nằm trên canvas */
-    z-index: 1; /* Đảm bảo nội dung nằm ở lớp phía trên canvas (vì canvas là -1) */
-    display: flex; /* Sử dụng flexbox để căn giữa nội dung */
-    flex-direction: column; /* Sắp xếp các mục theo chiều dọc */
-    justify-content: center; /* Căn giữa nội dung theo chiều dọc */
-    align-items: center; /* Căn giữa nội dung theo chiều ngang */
-    min-height: 100vh; /* Đảm bảo khu vực nội dung chiếm ít nhất toàn bộ chiều cao màn hình */
-    padding: 20px; /* Thêm khoảng đệm xung quanh nội dung */
-    box-sizing: border-box; /* Đảm bảo padding không làm tăng kích thước tổng thể */
-    text-align: center; /* Căn giữa chữ trong nội dung */
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 1em;
-    background-color: rgba(0, 123, 255, 0.7); /* Màu nền nút hơi trong suốt */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer; /* Thay đổi con trỏ thành hình bàn tay khi di chuột qua */
-    margin-top: 20px;
-    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu mượt mà khi di chuột qua */
-}
-
-button:hover {
-    background-color: rgba(0, 123, 255, 0.9); /* Nút sáng hơn khi di chuột qua */
->>>>>>> bf952cbfab552dd83da0d5155aee230c66a8371c
 }
