@@ -30,6 +30,7 @@ SOFTWARE.
 const promoPopup = document.getElementsByClassName('promo')[0];
 const promoPopupClose = document.getElementsByClassName('promo-close')[0];
 
+if (promoPopup && promoPopupClose) {
 if (isMobile()) {
     setTimeout(() => {
         promoPopup.style.display = 'table';
@@ -39,21 +40,28 @@ if (isMobile()) {
 promoPopupClose.addEventListener('click', e => {
     promoPopup.style.display = 'none';
 });
- 
+}
 
+console.log("Fluid-simulation.js started loading."); // Dòng 1
 
 // Simulation section
 const canvas = document.getElementById('fluid-canvas'); 
+
+console.log("Canvas element:", canvas); // Dòng 2: Kiểm tra xem canvas có được tìm thấy không
 
 if (!canvas) {
     console.error("Lỗi: Không tìm thấy phần tử canvas với ID 'fluid-canvas'. Vui lòng kiểm tra HTML.");
     throw new Error("Canvas element not found."); 
 }
 
-const { gl, ext } = getWebGLContext(canvas); // Đảm bảo hàm getWebGLContext đã được định nghĩa ở đâu đó
+const { gl, ext } = getWebGLContext(canvas); 
+console.log("--- Báo cáo kiểm tra khởi tạo WebGL ---");
+console.log("1. Phần tử Canvas được tìm thấy:", canvas);
+console.log("2. Đối tượng WebGL Context (gl):", gl);
+console.log("3. Các tiện ích mở rộng WebGL (ext):", ext);
 
 if (!gl) {
-    console.error("Lỗi: Trình duyệt không hỗ trợ WebGL. Vui lòng thử trình duyệt khác hoặc cập nhật.");
+    console.error("LỖI NẶNG: WebGL context không thể khởi tạo. Trình duyệt của bạn có thể không hỗ trợ hoặc có vấn đề.");
     throw new Error("WebGL not supported.");
 }
 
@@ -113,6 +121,7 @@ if (!ext.supportLinearFiltering) {
     config.BLOOM = false;
     config.SUNRAYS = false;
 }
+console.log("4. Bắt đầu thiết lập các chương trình và framebuffer.");
 
 // startGUI();
 
@@ -947,6 +956,7 @@ function CHECK_FRAMEBUFFER_STATUS () {
     if (status != gl.FRAMEBUFFER_COMPLETE)
         console.trace("Framebuffer error: " + status);
 }
+console.log("5. Các biến framebuffer đã được khai báo.");
 
 let dye;
 let velocity;
@@ -960,6 +970,7 @@ let sunraysTemp;
 
 let ditheringTexture = createTextureAsync('LDR_LLL1_0.png');
 
+console.log("6. Bắt đầu khởi tạo các Program (shader).");
 
 const blurProgram            = new Program(blurVertexShader, blurShader);
 const copyProgram            = new Program(baseVertexShader, copyShader);
@@ -978,6 +989,8 @@ const curlProgram            = new Program(baseVertexShader, curlShader);
 const vorticityProgram       = new Program(baseVertexShader, vorticityShader);
 const pressureProgram        = new Program(baseVertexShader, pressureShader);
 const gradienSubtractProgram = new Program(baseVertexShader, gradientSubtractShader);
+
+console.log("7. Các Program đã được khởi tạo.");
 
 const displayMaterial = new Material(baseVertexShader, displayShaderSource);
 
@@ -1166,6 +1179,7 @@ function updateKeywords () {
     if (config.SUNRAYS) displayKeywords.push("SUNRAYS");
     displayMaterial.setKeywords(displayKeywords);
 }
+console.log("8. Chuẩn bị gọi các hàm khởi tạo chính.");
 
 updateKeywords();
 initFramebuffers();
@@ -1173,9 +1187,12 @@ multipleSplats(parseInt(Math.random() * 20) + 5);
 
 let lastUpdateTime = Date.now();
 let colorUpdateTimer = 0.0;
+
+console.log("9. Chuẩn bị bắt đầu vòng lặp update.");
 update();
 
 function update () {
+    console.log("10. Hàm update() đã được gọi (một khung hình).");
     const dt = calcDeltaTime();
     if (resizeCanvas())
         initFramebuffers();
@@ -1296,6 +1313,7 @@ function step (dt) {
 }
 
 function render (target) {
+    console.log("11. Hàm render() đã được gọi.");
     if (config.BLOOM)
         applyBloom(dye.read, bloom);
     if (config.SUNRAYS) {
@@ -1316,6 +1334,19 @@ function render (target) {
     if (target == null && config.TRANSPARENT)
         drawCheckerboard(target);
     drawDisplay(target);
+        let error = gl.getError();
+    if (error !== gl.NO_ERROR) {
+        console.error("LỖI WEBGLLLLL! Mã lỗi:", error);
+        // Bạn có thể thêm một switch/case để dịch mã lỗi nếu muốn, ví dụ:
+        switch (error) {
+            case gl.INVALID_ENUM: console.error("INVALID_ENUM: Giá trị không hợp lệ."); break;
+            case gl.INVALID_VALUE: console.error("INVALID_VALUE: Giá trị tham số không hợp lệ."); break;
+            case gl.INVALID_OPERATION: console.error("INVALID_OPERATION: Trạng thái không hợp lệ cho hoạt động này."); break;
+            case gl.INVALID_FRAMEBUFFER_OPERATION: console.error("INVALID_FRAMEBUFFER_OPERATION: Thao tác framebuffer không hợp lệ."); break;
+            case gl.OUT_OF_MEMORY: console.error("OUT_OF_MEMORY: Không đủ bộ nhớ WebGL."); break;
+            case gl.CONTEXT_LOST_WEBGL: console.error("CONTEXT_LOST_WEBGL: WebGL context đã bị mất."); break;
+        }
+    }
 }
 
 function drawColor (target, color) {

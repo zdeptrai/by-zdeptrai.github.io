@@ -1,0 +1,24 @@
+{
+  "name": "webgl-fluid-site",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000W\u0000e\u0000b\u0000G\u0000L\u0000\r\u0000 \u0000",
+  "main": "dat.gui.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zdeptrai/by-zdeptrai.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zdeptrai/by-zdeptrai.github.io/issues"
+  },
+  "homepage": "https://github.com/zdeptrai/by-zdeptrai.github.io#readme",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0"
+  }
+}
