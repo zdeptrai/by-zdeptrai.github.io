@@ -19,7 +19,6 @@
     </head>
     <body>
         <canvas id="fluid-canvas"></canvas>
-
         <div id="website-content">
             <%- include('partials/header') %> 
 
@@ -28,11 +27,12 @@
                 <%- include('sections/about') %>
                 <%- include('sections/projects') %>
                 <%- include('sections/contact') %>
+                <%- include('sections/gallery') %>
             </main>
 
             <%- include('partials/footer') %>
         </div>
-
+        <script src="/script.js"></script> 
         <script src="/fluid-simulation.js"></script>
     </body>
 </html>

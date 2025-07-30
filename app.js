@@ -4,9 +4,11 @@ const path = require('path');
 
 // Cấu hình EJS làm template engine
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views')); // Thư mục chứa các template
+// Thư mục chứa các template - trở về thư mục views ở gốc dự án
+app.set('views', path.join(__dirname, 'views'));
 
 // Cấu hình Express để phục vụ các file tĩnh (CSS, JS, hình ảnh) từ thư mục 'public'
+// Thư mục public ở gốc dự án
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Định nghĩa route cho trang chủ
@@ -15,7 +17,7 @@ app.get('/', (req, res) => {
     // Các biến bạn muốn truyền vào template có thể được thêm vào đây.
     res.render('index', {
         pageTitle: 'Trang Web Cá Nhân Của Tôi',
-        yourName: '[Tên Của Bạn]'
+        yourName: '[Tên Của Bạn]' // Có thể thay đổi
     });
 });
 

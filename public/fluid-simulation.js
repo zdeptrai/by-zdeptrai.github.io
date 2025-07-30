@@ -42,12 +42,8 @@ promoPopupClose.addEventListener('click', e => {
 });
 }
 
-console.log("Fluid-simulation.js started loading."); // Dòng 1
-
 // Simulation section
 const canvas = document.getElementById('fluid-canvas'); 
-
-console.log("Canvas element:", canvas); // Dòng 2: Kiểm tra xem canvas có được tìm thấy không
 
 if (!canvas) {
     console.error("Lỗi: Không tìm thấy phần tử canvas với ID 'fluid-canvas'. Vui lòng kiểm tra HTML.");
@@ -57,13 +53,8 @@ if (!canvas) {
 resizeCanvas();
 
 const { gl, ext } = getWebGLContext(canvas); 
-console.log("--- Báo cáo kiểm tra khởi tạo WebGL ---");
-console.log("1. Phần tử Canvas được tìm thấy:", canvas);
-console.log("2. Đối tượng WebGL Context (gl):", gl);
-console.log("3. Các tiện ích mở rộng WebGL (ext):", ext);
 
 if (!gl) {
-    console.error("LỖI NẶNG: WebGL context không thể khởi tạo. Trình duyệt của bạn có thể không hỗ trợ hoặc có vấn đề.");
     throw new Error("WebGL not supported.");
 }
 
@@ -123,7 +114,6 @@ if (!ext.supportLinearFiltering) {
     config.BLOOM = false;
     config.SUNRAYS = false;
 }
-console.log("4. Bắt đầu thiết lập các chương trình và framebuffer.");
 
 // startGUI();
 
@@ -145,7 +135,7 @@ function getWebGLContext (canvas) {
         supportLinearFiltering = gl.getExtension('OES_texture_half_float_linear');
     }
 
-    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    gl.clearColor(0.0, 0.0, 0.0, 0);
 
     const halfFloatTexType = isWebGL2 ? gl.HALF_FLOAT : halfFloat.HALF_FLOAT_OES;
     let formatRGBA;
@@ -945,7 +935,7 @@ const blit = (() => {
         }
         if (clear)
         {
-            gl.clearColor(0.0, 0.0, 0.0, 1.0);
+            gl.clearColor(0.0, 0.0, 0.0, 0);
             gl.clear(gl.COLOR_BUFFER_BIT);
         }
         // CHECK_FRAMEBUFFER_STATUS();
@@ -958,7 +948,6 @@ function CHECK_FRAMEBUFFER_STATUS () {
     if (status != gl.FRAMEBUFFER_COMPLETE)
         console.trace("Framebuffer error: " + status);
 }
-console.log("5. Các biến framebuffer đã được khai báo.");
 
 let dye;
 let velocity;
@@ -972,7 +961,6 @@ let sunraysTemp;
 
 let ditheringTexture = createTextureAsync('LDR_LLL1_0.png');
 
-console.log("6. Bắt đầu khởi tạo các Program (shader).");
 
 const blurProgram            = new Program(blurVertexShader, blurShader);
 const copyProgram            = new Program(baseVertexShader, copyShader);
@@ -991,8 +979,6 @@ const curlProgram            = new Program(baseVertexShader, curlShader);
 const vorticityProgram       = new Program(baseVertexShader, vorticityShader);
 const pressureProgram        = new Program(baseVertexShader, pressureShader);
 const gradienSubtractProgram = new Program(baseVertexShader, gradientSubtractShader);
-
-console.log("7. Các Program đã được khởi tạo.");
 
 const displayMaterial = new Material(baseVertexShader, displayShaderSource);
 
@@ -1181,7 +1167,6 @@ function updateKeywords () {
     if (config.SUNRAYS) displayKeywords.push("SUNRAYS");
     displayMaterial.setKeywords(displayKeywords);
 }
-console.log("8. Chuẩn bị gọi các hàm khởi tạo chính.");
 
 updateKeywords();
 initFramebuffers();
@@ -1190,11 +1175,9 @@ multipleSplats(parseInt(Math.random() * 20) + 5);
 let lastUpdateTime = Date.now();
 let colorUpdateTimer = 0.0;
 
-console.log("9. Chuẩn bị bắt đầu vòng lặp update.");
 update();
 
 function update () {
-    console.log("10. Hàm update() đã được gọi (một khung hình).");
     const dt = calcDeltaTime();
     if (resizeCanvas())
         initFramebuffers();
@@ -1315,7 +1298,6 @@ function step (dt) {
 }
 
 function render (target) {
-    console.log("11. Hàm render() đã được gọi.");
     if (config.BLOOM)
         applyBloom(dye.read, bloom);
     if (config.SUNRAYS) {
