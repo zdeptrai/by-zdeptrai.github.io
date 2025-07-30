@@ -35,3 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault(); // Ngăn chặn hành vi nhảy tức thì mặc định
+
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth' // Cuộn mượt mà
+        });
+    });
+});

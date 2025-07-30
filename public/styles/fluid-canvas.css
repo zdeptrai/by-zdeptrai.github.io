@@ -1,0 +1,12 @@
+/* public/styles/fluid-canvas.css */
+
+/* -------------------- HIỆU ỨNG NỀN CHẤT LỎNG -------------------- */
+#fluid-canvas {
+    position: fixed; /* Giữ khung vẽ (canvas) cố định trên màn hình */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Chiều rộng 100% viewport */
+    height: 100vh; /* Chiều cao 100% viewport */
+    z-index: -999; /* Đặt canvas ở lớp phía sau cùng, để nội dung khác nằm trên nó */
+    display: block;
+}

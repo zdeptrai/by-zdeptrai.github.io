@@ -1,0 +1,194 @@
+/* public/styles/hero.css */
+
+/* ========================================================= */
+/* HERO SECTION STYLES                                       */
+/* ========================================================= */
+#hero {
+    min-height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff; /* Màu chữ trắng cho section hero */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Đổ bóng chữ để dễ nhìn */
+    background-color: transparent; /* Section hero không có nền để nhìn thấy fluid canvas */
+    box-shadow: none;
+    padding: 20px;
+    position: relative; /* RẤT QUAN TRỌNG: Để định vị absolute cho hiệu ứng phát sáng */
+    z-index: 5; /* Đảm bảo nội dung hero (chữ) nằm trên hiệu ứng glow */
+}  
+
+.hero-content {
+    text-align: center;
+    padding: 20px;
+    min-width: 280px;
+    max-width: 80%;
+    position: relative;
+    z-index: 6; /* Cao hơn #hero một chút, đảm bảo nội dung chính nằm trên circle */
+}
+
+#hero h1 {
+    font-size: 3.8em;
+    margin-bottom: 15px;
+    color: #fff; /* Đảm bảo màu trắng cho tiêu đề hero */
+    z-index: 20; /* Đảm bảo tiêu đề nằm trên glow và các phần khác nếu có */
+    position: relative; /* Để z-index hoạt động */
+    font-family: 'Meow Script', cursive;
+}
+
+#hero p {
+    font-size: 1.6em;
+    color: #fff; /* Đảm bảo màu trắng cho văn bản hero */
+    margin-top: 0;
+    z-index: 2; /* Đảm bảo khẩu hiệu nằm trên glow */
+    position: relative; /* Để z-index hoạt động */
+    font-family: 'Meow Script', cursive;
+}
+.btn-learn-more {
+    color: #fff; /* Màu chữ trắng cho nút */
+    background-color: black; /* Nền đen cho nút */
+    display: inline-block;
+    opacity: 1;
+    font-size: 1.2em;
+    padding: 15px 30px;
+    text-decoration: none; /* Bỏ gạch chân */
+    border-radius: 5px; /* Bo góc */
+    margin-top: 20px; /* Khoảng cách với p */
+    font-family: 'Meow Script', cursive;
+    position: relative; /* Đảm bảo position để z-index hoạt động */
+    z-index: 7; /* Cao hơn hero-content và circle */
+}
+
+/* ======================================================================== */
+/* === HIỆU ỨNG VÒNG TRÒN PHÁT SÁNG (CIRCLE GLOW) === */
+/* ======================================================================== */
+
+.circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60vh;
+    height: 60vh;
+    background: linear-gradient(#33ccff,#ff0066);
+    border-radius: 50%;
+    animation: animate 1s linear infinite;
+    z-index: -1; /* Đặt dưới tất cả nội dung chính và footer */
+}
+
+@keyframes animate {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.circle:after {
+    content:'';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    bottom: 10px;
+    left: 10px;
+    border-radius: 50%;
+    background-color: black; /* Tạo lỗ đen ở giữa */
+}
+
+.circle span {
+    position: absolute;
+    width: 1%;
+    height: 1%;
+    background: linear-gradient(#33ccff,#ff0066);
+    border-radius: 50%;
+}
+
+.circle span:nth-child(1) {
+    filter: blur(5px);
+}
+
+.circle span:nth-child(2) {
+    filter: blur(30px);
+}
+
+.circle span:nth-child(3) {
+    filter: blur(45px);
+}
+
+.circle span:nth-child(4) {
+    filter: blur(60px);
+}
+
+/* ========================================================= */
+/* MŨI TÊN CUỘN XUỐNG (SCROLL DOWN ARROW)                    */
+/* ========================================================= */
+.scroll-down-arrow {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border-radius: 50%;
+    z-index: 8;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Tạo hình mũi tên bằng pseudo-elements */
+.scroll-down-arrow::before,
+.scroll-down-arrow::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 3px;
+    background-color: #fff; /* THAY ĐỔI MÀU SANG ĐEN ĐỂ TĂNG TƯƠNG PHẢN CỰC ĐẠI */
+    border-radius: 2px;
+    opacity: 0;
+    /* Thêm đổ bóng để mũi tên nổi bật hơn */
+    filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.8)); /* Đổ bóng trắng để nổi bật trên nền tối */
+}
+
+/* Cạnh trái của mũi tên */
+.scroll-down-arrow::before {
+    transform: translate(-7px, 0px) rotate(45deg);
+    animation: arrow-bounce-left 2s infinite;
+    animation-delay: 0.2s;
+}
+
+/* Cạnh phải của mũi tên */
+.scroll-down-arrow::after {
+    transform: translate(7px, 0px) rotate(-45deg);
+    animation: arrow-bounce-right 2s infinite;
+    animation-delay: 0.4s;
+}
+
+/* Keyframes cho animation nhấp nháy của CẠNH TRÁI */
+@keyframes arrow-bounce-left {
+    0%, 100% {
+        opacity: 0.2; /* Bắt đầu và kết thúc với độ mờ nhẹ */
+        transform: translate(-7px, -15px) rotate(45deg);
+    }
+    50% {
+        opacity: 1; /* Đạt độ rõ tối đa */
+        transform: translate(-7px, 0px) rotate(45deg);
+    }
+}
+
+/* Keyframes cho animation nhấp nháy của CẠNH PHẢI */
+@keyframes arrow-bounce-right {
+    0%, 100% {
+        opacity: 0.2; /* Bắt đầu và kết thúc với độ mờ nhẹ */
+        transform: translate(7px, -15px) rotate(-45deg);
+    }
+    50% {
+        opacity: 1; /* Đạt độ rõ tối đa */
+        transform: translate(7px, 0px) rotate(-45deg);
+    }
+}

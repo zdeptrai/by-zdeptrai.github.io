@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
     // Các biến bạn muốn truyền vào template có thể được thêm vào đây.
     res.render('index', {
         pageTitle: 'Trang Web Cá Nhân Của Tôi',
-        yourName: '[Tên Của Bạn]' // Có thể thay đổi
+        yourName: 'Nguyễn Văn Tiến' // Có thể thay đổi
     });
 });
 

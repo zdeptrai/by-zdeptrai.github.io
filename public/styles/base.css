@@ -1,0 +1,14 @@
+/* public/styles/base.css */
+
+/* ========================================================= */
+/* GLOBAL & BASE STYLES                                */
+/* ========================================================= */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif; /* Font chữ chính, bạn có thể thay đổi */
+    line-height: 1.6;
+    color: #fff; /* Màu chữ mặc định cho nội dung web (để dễ đọc trên nền trắng của các section) */
+    position: relative;
+    /* padding-top để tránh nội dung bị header cố định che mất */
+    padding-top: 60px; /* Điều chỉnh giá trị này bằng chiều cao thực tế của header */
+}

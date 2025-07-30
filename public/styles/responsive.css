@@ -1,0 +1,74 @@
+/* public/styles/responsive.css */
+
+/* ========================================================= */
+/* RESPONSIVE DESIGN                                         */
+/* ========================================================= */
+@media (max-width: 768px) {
+    /* Header responsive */
+    header nav {
+        flex-direction: column; /* Trên màn hình nhỏ, chuyển sang xếp dọc */
+        gap: 15px; /* Khoảng cách giữa phần trái và menu */
+        padding: 15px 10px;
+    }
+
+    .header-left {
+        margin-bottom: 10px; /* Khoảng cách dưới phần tên/ảnh */
+    }
+
+    header nav ul {
+        flex-direction: column; /* Xếp menu dọc */
+        gap: 8px; /* Giảm khoảng cách giữa các mục menu */
+        width: 100%; /* Đảm bảo danh sách chiếm hết chiều rộng */
+    }     
+    #hero h1 {
+        font-size: 2.8em;
+    }
+    #hero p {
+        font-size: 1.2em;
+    }
+
+    /* About section responsive */
+    .about-main-content {
+        flex-direction: column; /* Xếp dọc các mục trên màn hình nhỏ */
+    }
+
+    .about-text-content,
+    .about-image-wrapper {
+        flex: auto; /* Cho phép các mục tự động điều chỉnh chiều rộng */
+        min-width: unset; /* Bỏ min-width */
+        width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng */
+    }
+
+    .about-image-wrapper {
+        order: -1; /* Đẩy ảnh lên trên phần văn bản trên màn hình nhỏ */
+        margin-bottom: 20px;
+    }
+
+    /* Skills section responsive */
+    .skills-grid { /* Vẫn giữ quy tắc này dù không còn dùng skills-grid nữa */
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Giảm kích thước tối thiểu của cột */
+        gap: 15px;
+    }
+
+    .skill-item { /* Vẫn giữ quy tắc này dù không còn dùng skill-item nữa */
+        padding: 15px;
+    }
+
+    .skill-item i { /* Vẫn giữ quy tắc này dù không còn dùng icon nữa */
+        font-size: 2.5em;
+    }
+    .circle {
+        width: 40vh; /* Nhỏ hơn trên di động */
+        height: 40vh;
+    }
+    .circle:after {
+        top: 25px; /* Điều chỉnh độ dày viền cho mobile */
+        right: 25px;
+        bottom: 25px;
+        left: 25px;
+    }
+    .circle span:nth-child(1) { filter: blur(3px); }
+    .circle span:nth-child(2) { filter: blur(10px); }
+    .circle span:nth-child(3) { filter: blur(20px); }
+    .circle span:nth-child(4) { filter: blur(40px); }
+}

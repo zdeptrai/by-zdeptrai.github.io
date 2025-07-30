@@ -1,0 +1,36 @@
+/* public/styles/components.css */
+
+/* ========================================================= */
+/* REUSABLE COMPONENTS                                       */
+/* ========================================================= */
+/* Kiểu cho các nút chung (sử dụng cho a hoặc button) */
+.btn {
+    display: inline-block; /* Để có thể áp dụng padding, margin cho thẻ <a> */
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-decoration: none; /* Bỏ gạch chân cho link */
+    border-radius: 8px; /* Bo góc nút nhiều hơn */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+    background-color: rgba(0, 123, 255, 0.8); /* Màu nền nút hơi trong suốt */
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: rgba(0, 123, 255, 1); /* Nút sáng hơn khi di chuột qua */
+    transform: translateY(-2px); /* Nhấc nhẹ lên */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Kiểu riêng cho nút trong Hero section */
+.btn-hero {
+    margin-top: 30px; /* Khoảng cách từ văn bản đến nút */
+    z-index: 2; /* Đảm bảo nút nằm trên hiệu ứng glow */
+    position: relative; /* Để z-index hoạt động */
+}
