@@ -1504,7 +1504,7 @@ window.addEventListener('mousedown', e => {
 
 window.addEventListener('mousemove', e => {
     let pointer = pointers[0];
-    if (!pointer.down) return;
+    // if (!pointer.down) return; // <--- DÒNG NÀY ĐANG NGĂN HIỆU ỨNG KHI KHÔNG GIỮ CHUỘT
 
     // Lấy tọa độ tương đối với canvas
     let rect = canvas.getBoundingClientRect();
@@ -1578,7 +1578,7 @@ window.addEventListener('keydown', e => {
 function updatePointerDownData (pointer, id, posX, posY) {
     pointer.id = id;
     pointer.down = true;
-    pointer.moved = false;
+    pointer.moved = true;
     // Tính toán texcoordX/Y dựa trên posX/Y đã được scaleByPixelRatio và tương đối với canvas
     pointer.texcoordX = posX / canvas.width;
     pointer.texcoordY = 1.0 - posY / canvas.height;
@@ -1597,7 +1597,7 @@ function updatePointerMoveData (pointer, posX, posY) {
     pointer.texcoordY = 1.0 - posY / canvas.height;
     pointer.deltaX = correctDeltaX(pointer.texcoordX - pointer.prevTexcoordX);
     pointer.deltaY = correctDeltaY(pointer.texcoordY - pointer.prevTexcoordY);
-    pointer.moved = Math.abs(pointer.deltaX) > 0 || Math.abs(pointer.deltaY) > 0;
+    pointer.moved = Math.abs(pointer.deltaX) > 0.0001 || Math.abs(pointer.deltaY) > 0.0001; // Tăng ngưỡng để tránh splat nhỏ không cần thiết
 }
 
 function updatePointerUpData (pointer) {

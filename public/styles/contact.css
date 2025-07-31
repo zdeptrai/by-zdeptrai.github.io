@@ -1,0 +1,90 @@
+/* public/styles/contact.css */
+
+/* ========================================================= */
+/* CONTACT SECTION STYLES                                    */
+/* ========================================================= */
+#contact {
+    text-align: center; /* Căn giữa tiêu đề và mô tả */
+    padding: 60px 20px;
+    margin: 20px auto;
+    max-width: 960px;
+    background-color: rgba(255, 255, 255, 0); /* Nền trong suốt */
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    color: #fff; /* Màu chữ trắng để nổi bật trên nền fluid */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Đổ bóng chữ để dễ nhìn */
+}
+
+#contact h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+#contact p {
+    font-size: 1.1em;
+    margin-bottom: 40px;
+    color: #eee;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 2-3 cột trên màn hình lớn, 1 cột trên di động */
+    gap: 30px; /* Khoảng cách giữa các mục liên hệ */
+    justify-content: center;
+    align-items: start; /* Căn chỉnh các mục theo chiều dọc */
+}
+
+.contact-item {
+    background-color: rgba(255, 255, 255, 0.1); /* Nền hơi trong suốt cho mỗi mục */
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.contact-item:hover {
+    transform: translateY(-5px); /* Nhấc nhẹ lên khi hover */
+    background-color: rgba(255, 255, 255, 0.2); /* Sáng hơn khi hover */
+}
+
+.contact-item i {
+    font-size: 3em; /* Kích thước biểu tượng */
+    color: #007bff; /* Màu xanh lam cho biểu tượng */
+    margin-bottom: 15px;
+    transition: color 0.3s ease;
+}
+
+.contact-item:hover i {
+    color: #0056b3; /* Biểu tượng đậm hơn khi hover */
+}
+
+.contact-item h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.contact-item a {
+    color: #fff; /* Màu chữ cho liên kết */
+    text-decoration: none;
+    font-size: 1.1em;
+    word-break: break-all; /* Ngắt dòng nếu liên kết quá dài */
+    transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: #007bff; /* Thay đổi màu khi hover */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr; /* Một cột trên màn hình nhỏ */
+    }
+}

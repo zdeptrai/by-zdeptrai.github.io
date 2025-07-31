@@ -37,6 +37,15 @@
     font-family: 'Meow Script', cursive;
 }
 
+#hero h2 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #fff; /* Đảm bảo màu trắng cho tiêu đề phụ */
+    z-index: 20; /* Đảm bảo tiêu đề phụ nằm trên glow và các phần khác nếu có */
+    position: relative; /* Để z-index hoạt động */
+    font-family: 'Meow Script', cursive;
+}
+
 #hero p {
     font-size: 1.6em;
     color: #fff; /* Đảm bảo màu trắng cho văn bản hero */
@@ -45,9 +54,11 @@
     position: relative; /* Để z-index hoạt động */
     font-family: 'Meow Script', cursive;
 }
+
 .btn-learn-more {
     color: #fff; /* Màu chữ trắng cho nút */
-    background-color: black; /* Nền đen cho nút */
+    background-color: transparent; /* THAY ĐỔI NỀN THÀNH TRONG SUỐT */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* THÊM ĐỔ BÓNG ĐỂ TẠO CHIỀU SÂU */
     display: inline-block;
     opacity: 1;
     font-size: 1.2em;
@@ -58,6 +69,14 @@
     font-family: 'Meow Script', cursive;
     position: relative; /* Đảm bảo position để z-index hoạt động */
     z-index: 7; /* Cao hơn hero-content và circle */
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Thêm transition cho border và shadow */
+}
+
+.btn-learn-more:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Nền hơi trắng trong suốt khi hover */
+    border-color: #007bff; /* Viền xanh khi hover */
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4); /* Đổ bóng xanh khi hover */
+    transform: translateY(-2px); /* Nhấc nhẹ lên khi hover */
 }
 
 /* ======================================================================== */
