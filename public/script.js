@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // =========================================================
+    // SKILL BARS FUNCTIONALITY
+    // =========================================================
     const skillBars = document.querySelectorAll('.skill-progress-item');
 
     skillBars.forEach(item => {
@@ -16,8 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // 2. Tính toán màu sắc dựa trên phần trăm
                 // Chúng ta sẽ tạo một gradient màu từ Xanh lam (thấp) sang Đỏ (cao) thông qua màu Tím/Hồng
-                // Điều này giúp tránh màu xanh lá cây thường xuất hiện khi chuyển màu trực tiếp bằng HSL qua vòng tròn màu.
-
                 let r, g, b;
 
                 // Interpolate Red component (tăng từ 0 đến 255)
@@ -34,13 +35,120 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
-});
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault(); // Ngăn chặn hành vi nhảy tức thì mặc định
 
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth' // Cuộn mượt mà
+    // =========================================================
+    // SMOOTH SCROLLING FUNCTIONALITY
+    // =========================================================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault(); // Ngăn chặn hành vi nhảy tức thì mặc định
+
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth' // Cuộn mượt mà
+            });
         });
+    });
+
+    // =========================================================
+    // GALLERY LIGHTBOX FUNCTIONALITY
+    // =========================================================
+    const galleryLightbox = document.getElementById('gallery-lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxVideo = document.getElementById('lightbox-video');
+    const lightboxGif = document.getElementById('lightbox-gif'); // Assuming you might handle GIFs differently if needed
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const closeBtn = document.querySelector('#gallery-lightbox .close-btn');
+    const prevItemBtn = document.querySelector('#gallery-lightbox .prev-item');
+    const nextItemBtn = document.querySelector('#gallery-lightbox .next-item');
+
+    let galleryItemsData = []; // To store the parsed gallery items for navigation
+    let currentIndex = 0;
+
+    // Function to show the lightbox with specific content
+    function showLightbox(index) {
+        currentIndex = index;
+        const item = galleryItemsData[currentIndex];
+
+        // Hide all media types first
+        lightboxImage.style.display = 'none';
+        lightboxVideo.style.display = 'none';
+        lightboxGif.style.display = 'none';
+        lightboxVideo.pause(); // Pause any currently playing video
+        lightboxVideo.currentTime = 0; // Reset video to start
+
+        // Set the title
+        lightboxTitle.textContent = item.title;
+
+        // Display the correct media type
+        if (item.resourceType === 'image') {
+            lightboxImage.src = item.fullUrl;
+            lightboxImage.style.display = 'block';
+        } else if (item.resourceType === 'video') {
+            lightboxVideo.src = item.fullUrl;
+            lightboxVideo.style.display = 'block';
+            lightboxVideo.load(); // Reload video to ensure it plays
+            lightboxVideo.play();
+        } else if (item.resourceType === 'gif') {
+            // For GIFs, we'll treat them as images for display in the lightbox
+            lightboxImage.src = item.fullUrl;
+            lightboxImage.style.display = 'block';
+        }
+
+        galleryLightbox.style.display = 'flex'; // Show lightbox using flex for centering
+        document.body.style.overflow = 'hidden'; // Prevent main page scrolling
+    }
+
+    // Function to hide the lightbox
+    function hideLightbox() {
+        galleryLightbox.style.display = 'none';
+        lightboxVideo.pause();
+        lightboxVideo.currentTime = 0; // Reset video to start
+        document.body.style.overflow = ''; // Allow main page scrolling
+    }
+
+    // Function to navigate through gallery items
+    function navigateGallery(direction) {
+        currentIndex += direction;
+        if (currentIndex < 0) {
+            currentIndex = galleryItemsData.length - 1;
+        } else if (currentIndex >= galleryItemsData.length) {
+            currentIndex = 0;
+        }
+        showLightbox(currentIndex);
+    }
+
+    // Event Listeners for Gallery Items
+    document.querySelectorAll('.gallery-item').forEach((item, index) => {
+        // Populate galleryItemsData array on page load
+        // This assumes that the 'gallery-item' elements are rendered with data attributes
+        galleryItemsData.push({
+            fullUrl: item.dataset.fullUrl,
+            resourceType: item.dataset.resourceType,
+            title: item.dataset.title,
+            index: index // Store index for navigation
+        });
+
+        item.addEventListener('click', () => {
+            showLightbox(index);
+        });
+    });
+
+    // Event Listeners for Lightbox Controls
+    closeBtn.addEventListener('click', hideLightbox);
+    prevItemBtn.addEventListener('click', () => navigateGallery(-1));
+    nextItemBtn.addEventListener('click', () => navigateGallery(1));
+
+    // Close lightbox when clicking outside content area
+    galleryLightbox.addEventListener('click', (e) => {
+        if (e.target === galleryLightbox) {
+            hideLightbox();
+        }
+    });
+
+    // Close lightbox with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && galleryLightbox.style.display === 'flex') {
+            hideLightbox();
+        }
     });
 });

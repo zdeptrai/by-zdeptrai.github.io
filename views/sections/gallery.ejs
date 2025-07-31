@@ -1,4 +1,35 @@
-<section id="gallery">
-    <h2>Thư viện Ảnh & Video</h2>
-    <p>Đây là nơi bạn sẽ trưng bày các hình ảnh, GIF và video ngắn của mình.</p>
-    </section>
+<section id="gallery" class="gallery-section">
+    <div class="container">
+        <h2>My Creations</h2>
+        <div class="gallery-grid">
+            <% if (galleryItems && galleryItems.length > 0) { %>
+                <% galleryItems.forEach(item => { %>
+                    <div class="gallery-item"
+                         data-full-url="<%= item.url %>"
+                         data-resource-type="<%= item.resourceType %>"
+                         data-title="<%= item.title %>">
+                        <img src="<%= item.thumbnailUrl %>" alt="<%= item.title %>" loading="lazy">
+                        <div class="gallery-item-overlay">
+                            <h3><%= item.title %></h3>
+                            <button class="view-item-btn" data-full-url="<%= item.url %>" data-resource-type="<%= item.resourceType %>">View</button>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p>No items in the gallery yet. Check back soon!</p>
+            <% } %>
+        </div>
+    </div>
+
+    <div id="gallery-lightbox" class="lightbox">
+        <span class="close-btn">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-image" src="" alt="Gallery Item" style="display: none;">
+            <video id="lightbox-video" src="" controls style="display: none;"></video>
+            <div id="lightbox-gif" style="display: none;"></div>
+            <h3 id="lightbox-title"></h3>
+        </div>
+        <a class="prev-item">&#10094;</a>
+        <a class="next-item">&#10095;</a>
+    </div>
+</section>
