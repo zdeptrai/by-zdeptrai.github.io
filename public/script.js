@@ -10,27 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (percentageSpan && fillBar) {
             const percentageText = percentageSpan.textContent;
-            // Lấy giá trị phần trăm (ví dụ: "90%" sẽ thành 90)
             const percentage = parseFloat(percentageText.replace('%', ''));
 
             if (!isNaN(percentage)) {
-                // 1. Đặt chiều rộng của thanh tiến độ dựa trên phần trăm
                 fillBar.style.width = percentage + '%';
-
-                // 2. Tính toán màu sắc dựa trên phần trăm
-                // Chúng ta sẽ tạo một gradient màu từ Xanh lam (thấp) sang Đỏ (cao) thông qua màu Tím/Hồng
                 let r, g, b;
-
-                // Interpolate Red component (tăng từ 0 đến 255)
-                r = Math.round(percentage * 2.55); // 0% -> 0, 100% -> 255
-
-                // Interpolate Blue component (giảm từ 255 về 0)
-                b = Math.round(255 - (percentage * 2.55)); // 0% -> 255, 100% -> 0
-
-                // Green component giữ nguyên 0 để tạo ra màu từ Xanh lam qua Tím đến Đỏ
+                r = Math.round(percentage * 2.55);
+                b = Math.round(255 - (percentage * 2.55));
                 g = 0;
-
-                // Áp dụng màu nền đã tính toán
                 fillBar.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
             }
         }
@@ -41,27 +28,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault(); // Ngăn chặn hành vi nhảy tức thì mặc định
+            e.preventDefault();
 
             document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth' // Cuộn mượt mà
+                behavior: 'smooth'
             });
         });
     });
 
     // =========================================================
-    // GALLERY LIGHTBOX FUNCTIONALITY
+    // GALLERY LIGHTBOX FUNCTIONALITY (UPDATED)
     // =========================================================
     const galleryLightbox = document.getElementById('gallery-lightbox');
     const lightboxImage = document.getElementById('lightbox-image');
     const lightboxVideo = document.getElementById('lightbox-video');
-    const lightboxGif = document.getElementById('lightbox-gif'); // Assuming you might handle GIFs differently if needed
     const lightboxTitle = document.getElementById('lightbox-title');
     const closeBtn = document.querySelector('#gallery-lightbox .close-btn');
     const prevItemBtn = document.querySelector('#gallery-lightbox .prev-item');
     const nextItemBtn = document.querySelector('#gallery-lightbox .next-item');
+    const downloadBtn = document.getElementById('download-btn');
+    const copyUrlBtn = document.getElementById('copy-url-btn');
 
-    let galleryItemsData = []; // To store the parsed gallery items for navigation
+    let galleryItemsData = [];
     let currentIndex = 0;
 
     // Function to show the lightbox with specific content
@@ -69,41 +57,39 @@ document.addEventListener('DOMContentLoaded', () => {
         currentIndex = index;
         const item = galleryItemsData[currentIndex];
 
-        // Hide all media types first
         lightboxImage.style.display = 'none';
         lightboxVideo.style.display = 'none';
-        lightboxGif.style.display = 'none';
-        lightboxVideo.pause(); // Pause any currently playing video
-        lightboxVideo.currentTime = 0; // Reset video to start
+        lightboxVideo.pause();
+        lightboxVideo.currentTime = 0;
 
-        // Set the title
         lightboxTitle.textContent = item.title;
+        
+        // Update utility buttons' data-url attribute
+        downloadBtn.href = item.fullUrl;
+        copyUrlBtn.setAttribute('data-url', item.fullUrl);
 
-        // Display the correct media type
         if (item.resourceType === 'image') {
             lightboxImage.src = item.fullUrl;
             lightboxImage.style.display = 'block';
+            downloadBtn.download = item.title + '.jpg'; // Suggest a filename
         } else if (item.resourceType === 'video') {
             lightboxVideo.src = item.fullUrl;
             lightboxVideo.style.display = 'block';
-            lightboxVideo.load(); // Reload video to ensure it plays
+            lightboxVideo.load();
             lightboxVideo.play();
-        } else if (item.resourceType === 'gif') {
-            // For GIFs, we'll treat them as images for display in the lightbox
-            lightboxImage.src = item.fullUrl;
-            lightboxImage.style.display = 'block';
+            downloadBtn.download = item.title + '.mp4'; // Suggest a filename
         }
 
-        galleryLightbox.style.display = 'flex'; // Show lightbox using flex for centering
-        document.body.style.overflow = 'hidden'; // Prevent main page scrolling
+        galleryLightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
     }
 
     // Function to hide the lightbox
     function hideLightbox() {
         galleryLightbox.style.display = 'none';
         lightboxVideo.pause();
-        lightboxVideo.currentTime = 0; // Reset video to start
-        document.body.style.overflow = ''; // Allow main page scrolling
+        lightboxVideo.currentTime = 0;
+        document.body.style.overflow = '';
     }
 
     // Function to navigate through gallery items
@@ -117,15 +103,42 @@ document.addEventListener('DOMContentLoaded', () => {
         showLightbox(currentIndex);
     }
 
-    // Event Listeners for Gallery Items
+    // Event listener for copy URL button
+    copyUrlBtn.addEventListener('click', async () => {
+        const url = copyUrlBtn.getAttribute('data-url');
+        if (navigator.clipboard) {
+            try {
+                await navigator.clipboard.writeText(url);
+                alert('URL đã được sao chép vào clipboard!');
+            } catch (err) {
+                console.error('Không thể sao chép URL:', err);
+                alert('Không thể sao chép URL. Vui lòng thử lại.');
+            }
+        } else {
+            // Fallback for older browsers
+            const textArea = document.createElement('textarea');
+            textArea.value = url;
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                alert('URL đã được sao chép vào clipboard!');
+            } catch (err) {
+                console.error('Không thể sao chép URL:', err);
+                alert('Không thể sao chép URL. Vui lòng thử lại.');
+            }
+            document.body.removeChild(textArea);
+        }
+    });
+
+    // Populate galleryItemsData array on page load
     document.querySelectorAll('.gallery-item').forEach((item, index) => {
-        // Populate galleryItemsData array on page load
-        // This assumes that the 'gallery-item' elements are rendered with data attributes
         galleryItemsData.push({
             fullUrl: item.dataset.fullUrl,
             resourceType: item.dataset.resourceType,
             title: item.dataset.title,
-            index: index // Store index for navigation
+            index: index
         });
 
         item.addEventListener('click', () => {
@@ -138,17 +151,21 @@ document.addEventListener('DOMContentLoaded', () => {
     prevItemBtn.addEventListener('click', () => navigateGallery(-1));
     nextItemBtn.addEventListener('click', () => navigateGallery(1));
 
-    // Close lightbox when clicking outside content area
     galleryLightbox.addEventListener('click', (e) => {
         if (e.target === galleryLightbox) {
             hideLightbox();
         }
     });
 
-    // Close lightbox with Escape key
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && galleryLightbox.style.display === 'flex') {
-            hideLightbox();
+        if (galleryLightbox.style.display === 'flex') {
+            if (e.key === 'ArrowLeft') {
+                navigateGallery(-1);
+            } else if (e.key === 'ArrowRight') {
+                navigateGallery(1);
+            } else if (e.key === 'Escape') {
+                hideLightbox();
+            }
         }
     });
 });

@@ -12,6 +12,9 @@
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link rel="stylesheet" href="/style.css"> 
+        <!-- Dòng này đã được cập nhật với đường dẫn chính xác -->
+        <link rel="stylesheet" href="/styles/gallery.css"> 
+        
         <script type="text/javascript" src="/dat.gui.min.js"></script>
 
         <script>
@@ -31,7 +34,8 @@
                 <%- include('sections/hero', { yourName: yourName }) %>
                 <%- include('sections/about') %>
                 <%- include('sections/projects') %>
-                <%- include('sections/gallery') %>
+                <!-- Dòng này truyền dữ liệu galleryItems vào gallery.ejs -->
+                <%- include('sections/gallery', { galleryItems: galleryItems }) %>
                 <%- include('sections/contact') %>
             </main>
 

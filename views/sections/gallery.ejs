@@ -6,12 +6,17 @@
                 <% galleryItems.forEach(item => { %>
                     <div class="gallery-item"
                          data-full-url="<%= item.url %>"
-                         data-resource-type="<%= item.resourceType %>"
+                         data-resource-type="<%= item.url.toLowerCase().endsWith('.mp4') || item.url.toLowerCase().endsWith('.mov') ? 'video' : 'image' %>"
                          data-title="<%= item.title %>">
-                        <img src="<%= item.thumbnailUrl %>" alt="<%= item.title %>" loading="lazy">
+                        <!-- Kiểm tra đuôi file để hiển thị ảnh hoặc video -->
+                        <% if (item.url.toLowerCase().endsWith('.mp4') || item.url.toLowerCase().endsWith('.mov')) { %>
+                            <video class="gallery-video-thumbnail" src="<%= item.url %>" alt="<%= item.title %>" loading="lazy"></video>
+                        <% } else { %>
+                            <img src="<%= item.url %>" alt="<%= item.title %>" loading="lazy">
+                        <% } %>
                         <div class="gallery-item-overlay">
                             <h3><%= item.title %></h3>
-                            <button class="view-item-btn" data-full-url="<%= item.url %>" data-resource-type="<%= item.resourceType %>">View</button>
+                            <button class="view-item-btn">View</button>
                         </div>
                     </div>
                 <% }); %>
@@ -21,12 +26,17 @@
         </div>
     </div>
 
+    <!-- The Lightbox Modal -->
     <div id="gallery-lightbox" class="lightbox">
         <span class="close-btn">&times;</span>
+        <!-- Added utility buttons -->
+        <div class="lightbox-utility-buttons">
+            <a id="download-btn" class="utility-btn" download><i class="fas fa-download"></i> Tải xuống</a>
+            <button id="copy-url-btn" class="utility-btn"><i class="fas fa-copy"></i> Sao chép URL</button>
+        </div>
         <div class="lightbox-content">
             <img id="lightbox-image" src="" alt="Gallery Item" style="display: none;">
             <video id="lightbox-video" src="" controls style="display: none;"></video>
-            <div id="lightbox-gif" style="display: none;"></div>
             <h3 id="lightbox-title"></h3>
         </div>
         <a class="prev-item">&#10094;</a>
