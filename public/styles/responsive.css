@@ -1,74 +1,184 @@
-/* public/styles/responsive.css */
+/*
+ * File: responsive.css
+ * File này chứa các media query để đảm bảo bố cục hiển thị tốt trên mọi thiết bị.
+ * Các quy tắc mặc định (ngoài @media) dành cho màn hình nhỏ nhất (mobile).
+ */
 
 /* ========================================================= */
-/* RESPONSIVE DESIGN                                         */
+/* Quy tắc chung cho điện thoại (mặc định)                   */
 /* ========================================================= */
-@media (max-width: 768px) {
-    /* Header responsive */
-    header nav {
-        flex-direction: column; /* Trên màn hình nhỏ, chuyển sang xếp dọc */
-        gap: 15px; /* Khoảng cách giữa phần trái và menu */
-        padding: 15px 10px;
+body {
+    font-size: 16px;
+}
+
+/* Ẩn menu chính và chỉ hiển thị nút hamburger trên mobile */
+.nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+}
+
+.hamburger-menu {
+    display: block; /* Hiển thị nút hamburger */
+}
+
+/* Ẩn các phần tử không cần thiết trên mobile */
+.desktop-only {
+    display: none;
+}
+
+/* Điều chỉnh tiêu đề và văn bản trên mobile */
+h1 {
+    font-size: 2.5em;
+    word-wrap: break-word;
+}
+
+h2 {
+    font-size: 2em;
+    word-wrap: break-word;
+}
+
+p, li {
+    font-size: 1em;
+    word-wrap: break-word;
+}
+
+/* Điều chỉnh bố cục các phần chính */
+section {
+    padding: 30px 15px;
+}
+
+/* Phần hero */
+#hero .hero-content {
+    flex-direction: column;
+    text-align: center;
+}
+
+/* Phần about */
+#about .about-content {
+    flex-direction: column;
+}
+
+/* Phần gallery */
+#gallery .gallery-grid {
+    /* Đã sửa đổi: Mặc định chia 2 cột trên điện thoại */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.gallery-item img {
+    border-radius: 8px;
+    width: 100%;
+    height: auto;
+}
+
+/* Phần contact */
+#contact .contact-form {
+    width: 100%;
+}
+
+
+/* ========================================================= */
+/* Các thiết bị nhỏ (Điện thoại màn hình ngang, từ 576px trở lên)*/
+/* ========================================================= */
+@media (min-width: 576px) {
+    body {
+        font-size: 17px;
     }
 
-    .header-left {
-        margin-bottom: 10px; /* Khoảng cách dưới phần tên/ảnh */
+    section {
+        padding: 40px 20px;
     }
 
-    header nav ul {
-        flex-direction: column; /* Xếp menu dọc */
-        gap: 8px; /* Giảm khoảng cách giữa các mục menu */
-        width: 100%; /* Đảm bảo danh sách chiếm hết chiều rộng */
-    }     
-    #hero h1 {
-        font-size: 2.8em;
-    }
-    #hero p {
-        font-size: 1.2em;
+    #hero .hero-content {
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
-    /* About section responsive */
-    .about-main-content {
-        flex-direction: column; /* Xếp dọc các mục trên màn hình nhỏ */
+    /* Quy tắc này không cần thiết nữa vì đã được xử lý ở trên */
+    /* #gallery .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    } */
+}
+
+/* ========================================================= */
+/* Các thiết bị trung bình (Máy tính bảng, từ 768px trở lên) */
+/* ========================================================= */
+@media (min-width: 768px) {
+    body {
+        font-size: 18px;
     }
 
-    .about-text-content,
-    .about-image-wrapper {
-        flex: auto; /* Cho phép các mục tự động điều chỉnh chiều rộng */
-        min-width: unset; /* Bỏ min-width */
-        width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng */
+    /* Hiển thị lại menu chính và ẩn nút hamburger */
+    /* Quan trọng: loại bỏ !important để tránh ghi đè không mong muốn */
+    .nav-links {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+    
+    .hamburger-menu {
+        display: none;
     }
 
-    .about-image-wrapper {
-        order: -1; /* Đẩy ảnh lên trên phần văn bản trên màn hình nhỏ */
-        margin-bottom: 20px;
+    .desktop-only {
+        display: block;
     }
 
-    /* Skills section responsive */
-    .skills-grid { /* Vẫn giữ quy tắc này dù không còn dùng skills-grid nữa */
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Giảm kích thước tối thiểu của cột */
-        gap: 15px;
+    /* Điều chỉnh các phần chính */
+    section {
+        padding: 60px 40px;
     }
 
-    .skill-item { /* Vẫn giữ quy tắc này dù không còn dùng skill-item nữa */
-        padding: 15px;
+    h1 {
+        font-size: 3em;
     }
 
-    .skill-item i { /* Vẫn giữ quy tắc này dù không còn dùng icon nữa */
+    h2 {
         font-size: 2.5em;
     }
-    .circle {
-        width: 40vh; /* Nhỏ hơn trên di động */
-        height: 40vh;
+
+    /* Đảm bảo hero content luôn căn giữa trên máy tính */
+    #hero .hero-content {
+        text-align: center;
+        padding-left: 0;
+        padding-right: 0;
+        flex-direction: column;
     }
-    .circle:after {
-        top: 25px; /* Điều chỉnh độ dày viền cho mobile */
-        right: 25px;
-        bottom: 25px;
-        left: 25px;
+    
+    #about .about-content {
+        flex-direction: row;
     }
-    .circle span:nth-child(1) { filter: blur(3px); }
-    .circle span:nth-child(2) { filter: blur(10px); }
-    .circle span:nth-child(3) { filter: blur(20px); }
-    .circle span:nth-child(4) { filter: blur(40px); }
+
+    #gallery .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    #contact .contact-form {
+        width: 70%;
+    }
+}
+
+/* ========================================================= */
+/* Các thiết bị lớn (Máy tính, từ 992px trở lên)             */
+/* ========================================================= */
+@media (min-width: 992px) {
+    #contact .contact-form {
+        width: 60%;
+    }
+
+    #gallery .gallery-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ========================================================= */
+/* Các thiết bị cực lớn (Màn hình lớn, từ 1200px trở lên)     */
+/* ========================================================= */
+@media (min-width: 1200px) {
+    #contact .contact-form {
+        width: 50%;
+    }
 }

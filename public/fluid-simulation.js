@@ -207,7 +207,7 @@ function supportRenderTextureFormat (gl, internalFormat, format, type) {
     return status == gl.FRAMEBUFFER_COMPLETE;
 }
 
-function startGUI () {
+/*function startGUI () {
     var gui = new dat.GUI({ width: 300 });
     gui.add(config, 'DYE_RESOLUTION', { 'high': 1024, 'medium': 512, 'low': 256, 'very low': 128 }).name('quality').onFinishChange(initFramebuffers);
     gui.add(config, 'SIM_RESOLUTION', { '32': 32, '64': 64, '128': 128, '256': 256 }).name('sim resolution').onFinishChange(initFramebuffers);
@@ -280,7 +280,7 @@ function startGUI () {
 
     if (isMobile())
         gui.close();
-}
+}*/
 
 function isMobile () {
     return /Mobi|Android/i.test(navigator.userAgent);
@@ -1485,8 +1485,6 @@ function correctRadius (radius) {
     return radius;
 }
 
-
-
 // Trình lắng nghe sự kiện (Event Listeners)
 
 // Sử dụng window.addEventListener cho sự kiện chuột để bắt tương tác toàn màn hình
@@ -1519,9 +1517,9 @@ window.addEventListener('mouseup', () => {
 });
 
 // Sử dụng window.addEventListener cho sự kiện chạm để bắt tương tác toàn màn hình
-// Thêm { passive: false } và e.preventDefault() để ngăn chặn cuộn/thu phóng mặc định của trình duyệt.
+// THAY ĐỔI: Đã loại bỏ e.preventDefault() để cho phép các tương tác mặc định của trình duyệt
 window.addEventListener('touchstart', e => {
-    e.preventDefault(); // Ngăn chặn hành vi cuộn/thu phóng mặc định
+    // e.preventDefault(); // Loại bỏ dòng này để cho phép tương tác với các phần tử khác
     const touches = e.targetTouches; 
 
     while (touches.length >= pointers.length)
@@ -1531,14 +1529,14 @@ window.addEventListener('touchstart', e => {
         // Lấy tọa độ tương đối với canvas
         let rect = canvas.getBoundingClientRect();
         let posX = scaleByPixelRatio(touches[i].clientX - rect.left); 
-        let posY = scaleByPixelRatio(touches[i].clientY - rect.top);   
+        let posY = scaleByPixelRatio(touches[i].clientY - rect.top); 
         
         updatePointerDownData(pointers[i + 1], touches[i].identifier, posX, posY);
     }
-}, { passive: false }); 
+}, { passive: true }); // THAY ĐỔI: Sử dụng { passive: true } để tối ưu hiệu năng và không ngăn chặn hành vi mặc định
 
 window.addEventListener('touchmove', e => {
-    e.preventDefault(); // Ngăn chặn hành vi cuộn/thu phóng mặc định
+    // e.preventDefault(); // Loại bỏ dòng này để cho phép cuộn trang
     const touches = e.targetTouches;
 
     for (let i = 0; i < touches.length; i++) {
@@ -1548,11 +1546,11 @@ window.addEventListener('touchmove', e => {
         // Lấy tọa độ tương đối với canvas
         let rect = canvas.getBoundingClientRect();
         let posX = scaleByPixelRatio(touches[i].clientX - rect.left); 
-        let posY = scaleByPixelRatio(touches[i].clientY - rect.top);   
+        let posY = scaleByPixelRatio(touches[i].clientY - rect.top); 
         
         updatePointerMoveData(pointer, posX, posY);
     }
-}, { passive: false }); 
+}, { passive: true }); // THAY ĐỔI: Sử dụng { passive: true }
 
 window.addEventListener('touchend', e => {
     const touches = e.changedTouches;
@@ -1571,7 +1569,6 @@ window.addEventListener('keydown', e => {
     if (e.key === ' ')
         splatStack.push(parseInt(Math.random() * 20) + 5);
 });
-
 
 // Các hàm hỗ trợ cho con trỏ (Pointer Helper Functions)
 

@@ -97,7 +97,7 @@
     display: none;
     position: fixed;
     z-index: 1000;
-    padding: 60px 0 0; /* Adjusted padding-top to give space */
+    padding: 60px 0 0;
     left: 0;
     top: 0;
     width: 100%;
@@ -113,7 +113,7 @@
     margin: auto;
     display: block;
     max-width: 90%;
-    max-height: 85vh; /* This is the key fix for the large image problem */
+    max-height: 85vh;
     text-align: center;
 }
 
@@ -121,7 +121,7 @@
 .lightbox-content video {
     width: auto;
     max-width: 100%;
-    max-height: 75vh; /* This is the key fix for the large image problem */
+    max-height: 75vh;
     display: block;
     margin: 0 auto;
     border-radius: 8px;
@@ -178,7 +178,7 @@
 }
 
 .prev-item:hover, .next-item:hover {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 /* New styles for utility buttons */
@@ -191,7 +191,7 @@
 }
 
 .utility-btn {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
     border: none;
     padding: 10px;
@@ -202,5 +202,66 @@
 }
 
 .utility-btn:hover {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* ========================================================= */
+/* TỐI ƯU HÓA CHO MÀN HÌNH DI ĐỘNG (MOBILE FIRST)             */
+/* ========================================================= */
+@media (max-width: 768px) {
+    .gallery-section {
+        padding: 30px 10px; /* Giảm padding tổng thể */
+    }
+
+    .gallery-section h2 {
+        font-size: 2em; /* Giảm kích thước tiêu đề */
+    }
+
+    .gallery-grid {
+        /*
+         * Chia thành 2 cột trên điện thoại để tận dụng không gian
+         * và giảm bớt chiều dài cuộn trang.
+         */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px; /* Giảm khoảng cách giữa các mục */
+    }
+
+    .gallery-item img,
+    .gallery-video-thumbnail {
+        height: 50px; /* Giảm chiều cao ảnh trên mobile để hiển thị gọn hơn */
+    }
+    
+    .gallery-item-overlay h3 {
+        font-size: 1.2em; /* Giảm kích thước font trên overlay */
+    }
+
+    .lightbox-content {
+        max-width: 95%; /* Mở rộng lightbox ra sát viền hơn */
+    }
+
+    .lightbox-content img,
+    .lightbox-content video {
+        max-height: 80vh; /* Tăng chiều cao tối đa của ảnh trong lightbox */
+    }
+
+    .close-btn {
+        font-size: 30px; /* Giảm kích thước nút đóng */
+        top: 10px;
+        right: 20px;
+    }
+
+    .prev-item, .next-item {
+        font-size: 18px; /* Giảm kích thước nút điều hướng */
+        padding: 10px;
+    }
+    
+    .lightbox-utility-buttons {
+        top: 10px;
+        left: 10px;
+        gap: 5px;
+    }
+    
+    .utility-btn {
+        padding: 8px; /* Giảm kích thước nút tiện ích */
+    }
 }

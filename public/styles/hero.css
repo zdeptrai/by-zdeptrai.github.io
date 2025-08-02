@@ -1,23 +1,29 @@
-/* public/styles/hero.css */
+/*
+ * public/styles/hero.css
+ * File này chứa các style cho section hero của trang web.
+ * Phiên bản này đã được tối ưu hóa để hiển thị tốt trên mọi kích thước màn hình.
+ */
 
 /* ========================================================= */
 /* HERO SECTION STYLES                                       */
 /* ========================================================= */
 #hero {
-    min-height: calc(100vh - 60px);
+    /* Đảm bảo hero chiếm toàn bộ chiều cao của màn hình */
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: #fff; /* Màu chữ trắng cho section hero */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Đổ bóng chữ để dễ nhìn */
-    background-color: transparent; /* Section hero không có nền để nhìn thấy fluid canvas */
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background-color: transparent;
     box-shadow: none;
     padding: 20px;
-    position: relative; /* RẤT QUAN TRỌNG: Để định vị absolute cho hiệu ứng phát sáng */
-    z-index: 5; /* Đảm bảo nội dung hero (chữ) nằm trên hiệu ứng glow */
-}  
+    position: relative;
+    z-index: 5;
+    overflow: hidden; /* Đảm bảo không có scrollbar không mong muốn */
+}
 
 .hero-content {
     text-align: center;
@@ -25,58 +31,63 @@
     min-width: 280px;
     max-width: 80%;
     position: relative;
-    z-index: 6; /* Cao hơn #hero một chút, đảm bảo nội dung chính nằm trên circle */
+    z-index: 6;
+    box-sizing: border-box; /* Đảm bảo padding không làm hỏng bố cục */
 }
 
 #hero h1 {
     font-size: 3.8em;
     margin-bottom: 15px;
-    color: #fff; /* Đảm bảo màu trắng cho tiêu đề hero */
-    z-index: 20; /* Đảm bảo tiêu đề nằm trên glow và các phần khác nếu có */
-    position: relative; /* Để z-index hoạt động */
+    color: #fff;
+    z-index: 20;
+    position: relative;
     font-family: 'Meow Script', cursive;
+    word-wrap: break-word; /* Ngăn chặn tràn chữ */
 }
 
 #hero h2 {
     font-size: 2.5em;
     margin-bottom: 10px;
-    color: #fff; /* Đảm bảo màu trắng cho tiêu đề phụ */
-    z-index: 20; /* Đảm bảo tiêu đề phụ nằm trên glow và các phần khác nếu có */
-    position: relative; /* Để z-index hoạt động */
+    color: #fff;
+    z-index: 20;
+    position: relative;
     font-family: 'Meow Script', cursive;
+    word-wrap: break-word; /* Ngăn chặn tràn chữ */
 }
 
 #hero p {
     font-size: 1.6em;
-    color: #fff; /* Đảm bảo màu trắng cho văn bản hero */
+    color: #fff;
     margin-top: 0;
-    z-index: 2; /* Đảm bảo khẩu hiệu nằm trên glow */
-    position: relative; /* Để z-index hoạt động */
+    z-index: 2;
+    position: relative;
     font-family: 'Meow Script', cursive;
+    word-wrap: break-word; /* Ngăn chặn tràn chữ */
 }
 
 .btn-learn-more {
-    color: #fff; /* Màu chữ trắng cho nút */
-    background-color: transparent; /* THAY ĐỔI NỀN THÀNH TRONG SUỐT */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* THÊM ĐỔ BÓNG ĐỂ TẠO CHIỀU SÂU */
+    color: #fff;
+    background-color: transparent;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     display: inline-block;
     opacity: 1;
     font-size: 1.2em;
     padding: 15px 30px;
-    text-decoration: none; /* Bỏ gạch chân */
-    border-radius: 5px; /* Bo góc */
-    margin-top: 20px; /* Khoảng cách với p */
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
     font-family: 'Meow Script', cursive;
-    position: relative; /* Đảm bảo position để z-index hoạt động */
-    z-index: 7; /* Cao hơn hero-content và circle */
-    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Thêm transition cho border và shadow */
+    position: relative;
+    z-index: 7;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    border: 2px solid transparent; /* Thêm viền trong suốt để tránh giật khi hover */
 }
 
 .btn-learn-more:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Nền hơi trắng trong suốt khi hover */
-    border-color: #007bff; /* Viền xanh khi hover */
-    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4); /* Đổ bóng xanh khi hover */
-    transform: translateY(-2px); /* Nhấc nhẹ lên khi hover */
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #007bff;
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
+    transform: translateY(-2px);
 }
 
 /* ======================================================================== */
@@ -87,13 +98,13 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); /* Giữ lại thuộc tính này, nó hoạt động tốt trên đa số các trường hợp */
     width: 60vh;
     height: 60vh;
     background: linear-gradient(#33ccff,#ff0066);
     border-radius: 50%;
     animation: animate 1s linear infinite;
-    z-index: -1; /* Đặt dưới tất cả nội dung chính và footer */
+    z-index: 0; /* Đặt lại z-index để không bị nội dung hero đè lên */
 }
 
 @keyframes animate {
@@ -113,32 +124,23 @@
     bottom: 10px;
     left: 10px;
     border-radius: 50%;
-    background-color: black; /* Tạo lỗ đen ở giữa */
+    background-color: black;
 }
 
+/* Các span tạo hiệu ứng mờ */
 .circle span {
     position: absolute;
-    width: 1%;
-    height: 1%;
-    background: linear-gradient(#33ccff,#ff0066);
+    width: 100%;
+    height: 100%;
+    background: transparent;
     border-radius: 50%;
 }
 
-.circle span:nth-child(1) {
-    filter: blur(5px);
-}
+.circle span:nth-child(1) { filter: blur(5px); }
+.circle span:nth-child(2) { filter: blur(30px); }
+.circle span:nth-child(3) { filter: blur(45px); }
+.circle span:nth-child(4) { filter: blur(60px); }
 
-.circle span:nth-child(2) {
-    filter: blur(30px);
-}
-
-.circle span:nth-child(3) {
-    filter: blur(45px);
-}
-
-.circle span:nth-child(4) {
-    filter: blur(60px);
-}
 
 /* ========================================================= */
 /* MŨI TÊN CUỘN XUỐNG (SCROLL DOWN ARROW)                    */
@@ -160,54 +162,94 @@
     overflow: hidden;
 }
 
-/* Tạo hình mũi tên bằng pseudo-elements */
 .scroll-down-arrow::before,
 .scroll-down-arrow::after {
     content: '';
     position: absolute;
     width: 25px;
     height: 3px;
-    background-color: #fff; /* THAY ĐỔI MÀU SANG ĐEN ĐỂ TĂNG TƯƠNG PHẢN CỰC ĐẠI */
+    background-color: #fff;
     border-radius: 2px;
     opacity: 0;
-    /* Thêm đổ bóng để mũi tên nổi bật hơn */
-    filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.8)); /* Đổ bóng trắng để nổi bật trên nền tối */
+    filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.8));
 }
 
-/* Cạnh trái của mũi tên */
 .scroll-down-arrow::before {
     transform: translate(-7px, 0px) rotate(45deg);
     animation: arrow-bounce-left 2s infinite;
     animation-delay: 0.2s;
 }
 
-/* Cạnh phải của mũi tên */
 .scroll-down-arrow::after {
     transform: translate(7px, 0px) rotate(-45deg);
     animation: arrow-bounce-right 2s infinite;
     animation-delay: 0.4s;
 }
 
-/* Keyframes cho animation nhấp nháy của CẠNH TRÁI */
 @keyframes arrow-bounce-left {
     0%, 100% {
-        opacity: 0.2; /* Bắt đầu và kết thúc với độ mờ nhẹ */
+        opacity: 0.2;
         transform: translate(-7px, -15px) rotate(45deg);
     }
     50% {
-        opacity: 1; /* Đạt độ rõ tối đa */
+        opacity: 1;
         transform: translate(-7px, 0px) rotate(45deg);
     }
 }
 
-/* Keyframes cho animation nhấp nháy của CẠNH PHẢI */
 @keyframes arrow-bounce-right {
     0%, 100% {
-        opacity: 0.2; /* Bắt đầu và kết thúc với độ mờ nhẹ */
+        opacity: 0.2;
         transform: translate(7px, -15px) rotate(-45deg);
     }
     50% {
-        opacity: 1; /* Đạt độ rõ tối đa */
+        opacity: 1;
         transform: translate(7px, 0px) rotate(-45deg);
+    }
+}
+
+@keyframes arrow-bounce-right {
+    0%, 100% {
+        opacity: 0.2;
+        transform: translate(7px, -15px) rotate(-45deg);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(7px, 0px) rotate(-45deg);
+    }
+}
+
+/* ========================================================= */
+/* RESPONSIVE STYLES                                         */
+/* ========================================================= */
+@media (max-width: 768px) {
+    #hero h1 {
+        font-size: 2.2em; /* Giảm kích thước font cho tiêu đề chính */
+    }
+
+    #hero h2 {
+        font-size: 1.6em; /* Giảm kích thước font cho tiêu đề phụ */
+    }
+
+    #hero p {
+        font-size: 1.1em; /* Giảm kích thước font cho đoạn văn */
+    }
+
+    .btn-learn-more {
+        font-size: 1em;
+        padding: 12px 25px;
+    }
+
+    .circle {
+        width: 70vw; /* Sử dụng viewport width để đảm bảo vòng tròn phù hợp hơn */
+        height: 70vw;
+    }
+
+    /* Đảm bảo vòng tròn không tràn ra ngoài màn hình */
+    .circle:after {
+        top: 5px;
+        right: 5px;
+        bottom: 5px;
+        left: 5px;
     }
 }

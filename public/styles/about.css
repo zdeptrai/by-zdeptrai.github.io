@@ -5,7 +5,12 @@
 /* ========================================================= */
 /* -------------------- ABOUT SECTION STYLES -------------------- */
 #about {
-    text-align: left; /* Căn chỉnh lại văn bản về bên trái */
+    /* Đảm bảo nội dung được căn giữa trong section */
+    text-align: center;
+}
+
+#about h1, #about h2 {
+    text-align: center;
 }
 
 .about-main-content {
@@ -13,12 +18,14 @@
     flex-wrap: wrap; /* Cho phép các mục xuống dòng trên màn hình nhỏ */
     gap: 40px; /* Khoảng cách giữa văn bản và ảnh */
     align-items: center; /* Căn giữa theo chiều dọc */
+    justify-content: center; /* Căn giữa các item theo chiều ngang */
     margin-bottom: 40px; /* Khoảng cách giữa phần giới thiệu và kỹ năng */
 }
 
 .about-text-content {
     flex: 2; /* Chiếm 2 phần không gian */
     min-width: 300px; /* Chiều rộng tối thiểu để tránh bị co quá nhỏ */
+    text-align: center;
 }
 
 .about-image-wrapper {
@@ -85,4 +92,26 @@
     background-color: #007bff; /* Màu dự phòng nếu JS không tải được, bạn có thể thay đổi */
     border-radius: 5px;
     transition: width 0.8s ease-in-out;
+}
+
+/* ========================================================= */
+/* Các thiết bị nhỏ (Điện thoại màn hình dọc và ngang)      */
+/* ========================================================= */
+@media (max-width: 768px) {
+    .about-main-content {
+        gap: 20px; /* Giảm khoảng cách giữa ảnh và văn bản trên mobile */
+        flex-direction: column; /* Xếp ảnh và văn bản theo chiều dọc */
+        text-align: center;
+        max-width: 100%;
+    }
+    
+    .about-text-content {
+        order: 2; /* Đặt phần văn bản xuống dưới */
+        text-align: center;
+    }
+    
+    .about-image-wrapper {
+        order: 1; /* Đặt phần ảnh lên trên */
+        width: 100%;
+    }
 }

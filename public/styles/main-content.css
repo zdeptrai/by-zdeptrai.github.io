@@ -1,4 +1,7 @@
-/* public/styles/main-content.css */
+/*
+ * public/styles/main-content.css
+ * File này đã được sửa để khắc phục lỗi tràn ngang trên thiết bị di động.
+ */
 
 /* ========================================================= */
 /* MAIN CONTENT LAYOUT & GENERIC SECTIONS                    */
@@ -11,9 +14,12 @@
     justify-content: center;
     align-items: center;
     min-height: calc(100vh - 60px); /* Chiều cao tối thiểu, trừ đi chiều cao header */
-    padding: 20px;
+    padding: 0 20px; /* Chỉ thêm padding hai bên để tránh tràn */
     box-sizing: border-box;
     text-align: center;
+    /* Rất quan trọng: Ngăn tràn ngang */
+    overflow-x: hidden;
+    width: 100%;
 }
 
 /* Tạo kiểu cho các section nội dung chung (Về tôi, Dự án, Liên hệ, Thư viện) */
@@ -26,4 +32,22 @@ section {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Đổ bóng mềm mại */
     color: #fff; /* Màu chữ cho nội dung bên trong các section để nổi bật trên nền fluid */
     text-shadow: none; /* Bỏ đổ bóng chữ nếu nền là trắng */
+    /* Rất quan trọng: Thêm thuộc tính này để đảm bảo nội dung không tràn ra ngoài */
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* Thêm một media query để xử lý màn hình nhỏ tốt hơn */
+@media (max-width: 768px) {
+    #website-content {
+        /* Giảm padding trên màn hình nhỏ để tận dụng tối đa không gian */
+        padding: 0 10px;
+    }
+
+    section {
+        /* Giảm padding để nội dung không bị quá chật chội */
+        padding: 30px 15px;
+        /* Đảm bảo nội dung con không tràn ra ngoài section */
+        overflow: hidden;
+    }
 }

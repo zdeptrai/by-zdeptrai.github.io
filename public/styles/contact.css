@@ -29,7 +29,8 @@
 
 .contact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 2-3 cột trên màn hình lớn, 1 cột trên di động */
+    /* 2-3 cột trên màn hình lớn */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px; /* Khoảng cách giữa các mục liên hệ */
     justify-content: center;
     align-items: start; /* Căn chỉnh các mục theo chiều dọc */
@@ -82,9 +83,45 @@
     color: #007bff; /* Thay đổi màu khi hover */
 }
 
-/* Responsive adjustments for smaller screens */
+
+/* Tối ưu hóa cho màn hình điện thoại (Mobile First) */
 @media (max-width: 768px) {
+    #contact {
+        padding: 20px 5px; /* Giảm padding tổng thể cho section */
+    }
+    
     .contact-grid {
-        grid-template-columns: 1fr; /* Một cột trên màn hình nhỏ */
+        /*
+         * Cấu hình lại Grid để hiển thị 2 cột trên màn hình điện thoại
+         */
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .contact-item {
+        padding: 10px; /* Giảm padding cho mỗi mục */
+        /* Giảm kích thước font và icon để chúng vừa vặn trên mobile */
+    }
+    
+    .contact-item i {
+        font-size: 1.8em;
+        margin-bottom: 5px;
+    }
+    
+    .contact-item h3 {
+        font-size: 0.9em;
+    }
+
+    .contact-item a {
+        font-size: 0.8em;
+    }
+}
+
+/* Cấu hình cho màn hình cực nhỏ để chuyển sang 1 cột nếu cần */
+@media (max-width: 480px) {
+    .contact-grid {
+        grid-template-columns: 1fr; /* Xếp thành 1 cột */
+        gap: 15px;
     }
 }

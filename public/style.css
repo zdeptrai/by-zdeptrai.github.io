@@ -1,19 +1,24 @@
-/* public/style.css */
+/*
+ * public/style.css
+ * File này điều phối tất cả các file style khác.
+ */
 
-/* Import base styles */
-@import url('styles/base.css');
+/* Import các file style cơ bản và chung trước */
+@import url('styles/base.css'); 
+@import url('styles/components.css');
+@import url('styles/main-content.css'); 
 
-/* Import specific section styles */
+/* Import các file style của từng section */
 @import url('styles/fluid-canvas.css');
-@import url('styles/header.css');
-@import url('styles/main-content.css');
 @import url('styles/hero.css');
 @import url('styles/about.css');
-@import url('styles/contact.css');
 @import url('styles/projects.css'); 
+@import url('styles/gallery.css'); 
+@import url('styles/contact.css');
 
-/* Import reusable components */
-@import url('styles/components.css');
+/* Import HEADER CUỐI CÙNG để đảm bảo ưu tiên */
+@import url('styles/header.css');
 
-/* Import responsive styles */
+/* IMPORT RESPONSIVE CUỐI CÙNG ĐỂ ĐẢM BẢO ƯU TIÊN TUYỆT ĐỐI */
+/* Các media query ở đây sẽ ghi đè lên tất cả các file khác khi cần */
 @import url('styles/responsive.css');

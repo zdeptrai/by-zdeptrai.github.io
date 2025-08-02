@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="Cache-Control" content="no-cache">
+        <!-- RẤT QUAN TRỌNG: Đảm bảo trang web hiển thị đúng trên mọi thiết bị -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <title><%= pageTitle %></title>
         
@@ -11,12 +12,12 @@
         <link href="https://fonts.googleapis.com/css2?family=Meow+Script&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        
+        <!-- TẢI FILE CSS TỔNG HỢP MỚI -->
         <link rel="stylesheet" href="/style.css"> 
-        <!-- Dòng này đã được cập nhật với đường dẫn chính xác -->
-        <link rel="stylesheet" href="/styles/gallery.css"> 
         
         <script type="text/javascript" src="/dat.gui.min.js"></script>
-
+        
         <script>
             // Google Analytics script
             window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
@@ -34,7 +35,6 @@
                 <%- include('sections/hero', { yourName: yourName }) %>
                 <%- include('sections/about') %>
                 <%- include('sections/projects') %>
-                <!-- Dòng này truyền dữ liệu galleryItems vào gallery.ejs -->
                 <%- include('sections/gallery', { galleryItems: galleryItems }) %>
                 <%- include('sections/contact') %>
             </main>

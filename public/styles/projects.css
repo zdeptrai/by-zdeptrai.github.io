@@ -1,63 +1,78 @@
-/* public/styles/projects.css */
+/*
+ * public/styles/projects.css
+ * Phiên bản này đã được tối ưu hóa hoàn toàn để khắc phục lỗi tràn ngang trên thiết bị di động
+ * bằng cách sử dụng các quy tắc CSS mạnh mẽ và trực tiếp hơn.
+ */
 
 /* ========================================================= */
 /* PROJECTS SECTION STYLES                                   */
 /* ========================================================= */
 #projects {
-    text-align: center; /* Căn giữa tiêu đề và mô tả */
+    text-align: center;
     padding: 60px 20px;
     margin: 20px auto;
-    max-width: 1200px; /* Chiều rộng lớn hơn cho lưới dự án */
-    background-color: rgba(255, 255, 255, 0); /* Nền trong suốt */
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0);
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    color: #fff; /* Màu chữ trắng để nổi bật trên nền fluid */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Đổ bóng chữ để dễ nhìn */
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
 }
 
 #projects h2 {
     font-size: 2.5em;
     margin-bottom: 20px;
     color: #fff;
+    word-wrap: break-word; 
+    overflow-wrap: break-word;
 }
 
 #projects p {
     font-size: 1.1em;
     margin-bottom: 40px;
     color: #eee;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
+/* Lưới dự án trên màn hình lớn */
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 2-3 cột trên màn hình lớn, 1 cột trên di động */
-    gap: 30px; /* Khoảng cách giữa các dự án */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
     justify-content: center;
-    align-items: stretch; /* Đảm bảo các thẻ có chiều cao bằng nhau */
+    align-items: stretch;
 }
 
 .project-item {
-    background-color: rgba(255, 255, 255, 0.1); /* Nền hơi trong suốt cho mỗi dự án */
+    background-color: rgba(255, 255, 255, 0.1);
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
     align-items: center;
     text-align: center;
     transition: transform 0.3s ease, background-color 0.3s ease;
+    box-sizing: border-box;
+    min-width: 0;
+    width: 100%;
 }
 
 .project-item:hover {
-    transform: translateY(-8px); /* Nhấc nhẹ lên khi hover */
-    background-color: rgba(255, 255, 255, 0.2); /* Sáng hơn khi hover */
+    transform: translateY(-8px);
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .project-item .project-icon {
-    font-size: 3.5em; /* Kích thước biểu tượng lớn hơn */
-    color: #007bff; /* Màu xanh lam cho biểu tượng */
+    font-size: 3.5em;
+    color: #007bff;
     margin-bottom: 20px;
     display: flex;
-    gap: 10px; /* Khoảng cách giữa các icon nếu có nhiều hơn 1 */
+    gap: 10px;
+    min-width: 0;
 }
 
 .project-item .project-icon i {
@@ -65,43 +80,53 @@
 }
 
 .project-item:hover .project-icon i {
-    color: #0056b3; /* Biểu tượng đậm hơn khi hover */
+    color: #0056b3;
 }
 
 .project-item h3 {
     font-size: 1.8em;
     margin-bottom: 15px;
     color: #fff;
+    word-wrap: break-word; 
+    overflow-wrap: break-word;
+    min-width: 0;
 }
 
 .project-item p {
     font-size: 1em;
     color: #eee;
-    flex-grow: 1; /* Đảm bảo mô tả chiếm hết không gian còn lại */
-    margin-bottom: 20px; /* Khoảng cách với nút */
+    flex-grow: 1;
+    margin-bottom: 20px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    min-width: 0;
 }
 
 .project-links {
-    margin-top: auto; /* Đẩy các nút xuống dưới cùng */
+    margin-top: auto;
     display: flex;
-    flex-wrap: wrap; /* Cho phép các nút xuống dòng */
-    gap: 10px; /* Khoảng cách giữa các nút */
+    flex-wrap: wrap;
+    gap: 10px;
     justify-content: center;
+    width: 100%;
+    min-width: 0;
 }
 
 .btn-project {
-    display: inline-flex; /* Sử dụng inline-flex để căn giữa icon và text */
+    display: inline-flex;
     align-items: center;
-    gap: 8px; /* Khoảng cách giữa icon và text */
+    gap: 8px;
     padding: 10px 20px;
     font-size: 0.95em;
     font-weight: bold;
     text-decoration: none;
     border-radius: 5px;
-    background-color: #007bff; /* Màu nền nút */
+    background-color: #007bff;
     color: white;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    max-width: 100%;
 }
 
 .btn-project:hover {
@@ -111,16 +136,69 @@
 }
 
 .btn-discord-invite {
-    background-color: #7289da; /* Màu xanh Discord */
+    background-color: #7289da;
 }
 
 .btn-discord-invite:hover {
-    background-color: #677eb4; /* Màu xanh Discord đậm hơn khi hover */
+    background-color: #677eb4;
 }
 
-/* Responsive adjustments for smaller screens */
+/* ========================================================= */
+/* RESPONSIVE STYLES (Đảm bảo bố cục xếp dọc trên mobile)    */
+/* ========================================================= */
 @media (max-width: 768px) {
+    #projects {
+        padding: 40px 15px;
+    }
+
+    /* Quan trọng: Bật Flexbox để các item xếp chồng lên nhau */
     .project-grid {
-        grid-template-columns: 1fr; /* Một cột trên màn hình nhỏ */
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .project-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+        /* Quan trọng: Chiếm 100% chiều rộng có sẵn */
+        width: 100%; 
+        min-width: 0;
+    }
+
+    .project-item .project-icon {
+        font-size: 2.5em;
+        margin-bottom: 15px;
+        display: block;
+        min-width: 0;
+    }
+
+    .project-item h3 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        min-width: 0;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    .project-item p {
+        font-size: 1em;
+        margin-bottom: 15px;
+        min-width: 0;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .project-links {
+        flex-direction: column;
+        gap: 10px;
+        min-width: 0;
+    }
+
+    .btn-project {
+        width: 100%;
+        justify-content: center;
+        min-width: 0;
     }
 }

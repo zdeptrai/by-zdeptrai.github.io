@@ -1,5 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
     // =========================================================
+    // HEADER RESPONSIVE MENU
+    // =========================================================
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.querySelector('header nav ul');
+
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    }
+
+    // Tùy chọn: Đóng menu khi nhấp vào một liên kết
+    const navLinks = document.querySelectorAll('header nav ul li a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+        });
+    });
+
+    // =========================================================
     // SKILL BARS FUNCTIONALITY
     // =========================================================
     const skillBars = document.querySelectorAll('.skill-progress-item');
